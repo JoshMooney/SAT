@@ -38,10 +38,10 @@ int main()
 	bool d_cir = false, d_tri = false, d_rect = false, d_pent = false;
     // Create the main window 
     sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Bouncing Balls"); 
-	const int ballNum = 20;
+	const int ballNum = 2;
 	const int triNum = 2;
-	const int rectNum = 20;
-	const int pentNum = 20;
+	const int rectNum = 2;
+	const int pentNum = 2;
 	Circle circleArray[ballNum];
 	Triangle triangleArray[triNum];
 	MyRectangle rectangleArray[rectNum];

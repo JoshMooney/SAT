@@ -16,6 +16,7 @@ public:
 	void Update();
 	void Move();
 	void Rotate();
+	sf::Vector2f getPosition()	{ return m_position; }
 };
 
 #endif
