@@ -24,6 +24,10 @@
 #include "Triangle.h"
 #include "Rectangle.h"
 #include "Pentagon.h"
+#include "CollisionDetection.h"
+
+
+using namespace std;
  
  
   
@@ -46,6 +50,7 @@ int main()
 	Triangle triangleArray[triNum];
 	MyRectangle rectangleArray[rectNum];
 	Pentagon pentagonArray[pentNum];
+	CollisionDectection collision;
 	#pragma region Font and text
 	// Declare and load a font
 	sf::Font font;
@@ -104,6 +109,10 @@ int main()
             // Escape key : exit 
             if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape)) 
                 window.close(); 
+			if (Event.key.code == sf::Keyboard::Space){
+				bool SAT = collision.sat(triangleArray[0], triangleArray[1]);
+				cout << SAT << endl;
+			}
 			#pragma region Keypresses
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num0)) { d_cir = false;	d_tri = false;		d_rect = false;		d_pent = false;}//None active
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) { d_cir = true;		d_tri = false;		d_rect = false;		d_pent = false;}//Cirlce active

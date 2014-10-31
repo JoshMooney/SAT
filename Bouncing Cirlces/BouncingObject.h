@@ -9,6 +9,7 @@ private:
 	sf::Vector2f m_direction;
 	sf::ConvexShape m_shape;
 	sf::Transform m_rotationMatrix;
+	int vertexCount;
 	float m_rot;
 	int colourCool;
 public:
@@ -17,7 +18,7 @@ public:
 	void swapDirectionX();
 	void swapDirectionY();
 	sf::Vector2f getDirection();
-	sf::ConvexShape& getShape();
+	sf::ConvexShape getShape()	{ return m_shape; }
 	void setShape(sf::ConvexShape shape);
 	sf::Transform getRotationMatrix();
 	void setRotationMatrix();
@@ -26,7 +27,10 @@ public:
 	void Update();
 	void Draw(sf::RenderWindow& w);
 	vector<sf::Vector2f> m_pointArray;
+	sf::VertexArray vertexArray;
 	int numPoints;
+	virtual sf::Vector2f getPosition();
+	sf::VertexArray getVertexArray()	{ return vertexArray; }
 };
 
 #endif

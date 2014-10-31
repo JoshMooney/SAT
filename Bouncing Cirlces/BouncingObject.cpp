@@ -14,6 +14,7 @@ BouncingObject::BouncingObject()
 	if(num >= 1){m_rot * -1;}
 	m_rotationMatrix.rotate(m_rot);
 	colourCool = 0;
+	vertexCount = 0;
 }
 
 //void setDirection(sf::Vector2f dir);
@@ -51,12 +52,6 @@ void BouncingObject::Draw(sf::RenderWindow& w)
 {
 	m_rotationMatrix.rotate(m_rot);
 	w.draw(m_shape);
-}
-
-//sf::ConvexShape getShape();
-sf::ConvexShape& BouncingObject::getShape()
-{
-	return m_shape;
 }
 
 //void setShape(sf::ConvexShape)
