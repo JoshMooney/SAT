@@ -41,16 +41,16 @@ Triangle::Triangle()
 void Triangle::Bounce()
 {
 	bool colour = false;
-
+	sf::ConvexShape shape = getShape();
 	if(getShape().getPoint(0).x > 800 || getShape().getPoint(0).x < 0 || 
 		getShape().getPoint(1).x > 800 || getShape().getPoint(1).x < 0 || 
 		getShape().getPoint(2).x > 800 || getShape().getPoint(2).x < 0) 
-	{swapDirectionX();	colour = true; size = 10;}
+	{swapDirectionX();	/*colour = true; /*size = 10;*/}
 
 	if(getShape().getPoint(0).y > 600 || getShape().getPoint(0).y < 0 || 
 		getShape().getPoint(1).y > 600 || getShape().getPoint(1).y < 0 || 
 		getShape().getPoint(2).y > 600 || getShape().getPoint(2).y < 0) 
-	{swapDirectionY();	colour = true; size = 10;}
+	{swapDirectionY();	/*colour = true; /*size = 10;*/}
 
 	if(colour)
 	{
@@ -71,9 +71,9 @@ void Triangle::Move()
 	getShape().setPoint(1, m_position + m_pointArray.at(1));
 	getShape().setPoint(2, m_position + m_pointArray.at(2));
 
-	vertexArray.at(0) = m_position + m_pointArray.at(0);
-	vertexArray.at(1) = m_position + m_pointArray.at(1);
-	vertexArray.at(2) = m_position + m_pointArray.at(2);
+	vertexArray.at(0) = getShape().getPoint(0);
+	vertexArray.at(1) = getShape().getPoint(1);
+	vertexArray.at(2) = getShape().getPoint(2);
 }
 
 void Triangle::Update()

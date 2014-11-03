@@ -3,8 +3,8 @@
 
 BouncingObject::BouncingObject()
 {
-	m_direction = sf::Vector2f((static_cast <float>(rand() % 100 + 1))/ 1000, (static_cast <float>(rand() % 100 + 1))/1000);
-	m_direction = sf::Vector2f((static_cast <float>(rand() % 100 + 1)) / 100, (static_cast <float>(rand() % 100 + 1)) / 100);
+	//m_direction = sf::Vector2f((static_cast <float>(rand() % 100 + 1)) / 1000, (static_cast <float>(rand() % 100 + 1)) / 1000);
+	//m_direction = sf::Vector2f((static_cast <float>(rand() % 100 + 1)) / 500, (static_cast <float>(rand() % 100 + 1)) / 500);
 	int num = rand() % 2;
 	if(num >= 1){swapDirectionX();}
 	num = rand() % 2;

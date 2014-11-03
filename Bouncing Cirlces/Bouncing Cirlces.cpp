@@ -46,7 +46,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Bouncing Balls"); 
 
 	const int ballNum = 2;
-	const int triNum = 3;
+	const int triNum = 2;
 	const int rectNum = 2;
 	const int pentNum = 2;
 
@@ -56,6 +56,8 @@ int main()
 	MyRectangle rectangleArray[rectNum];
 	Pentagon pentagonArray[pentNum];
 
+	triangleArray[0].setDirection(sf::Vector2f(0, 1));
+	triangleArray[1].setDirection(sf::Vector2f(0, -1));
 	#pragma region Font and text
 	// Declare and load a font
 	sf::Font font;
@@ -114,16 +116,11 @@ int main()
             // Escape key : exit 
             if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape)) 
                 window.close(); 
-			//if (Event.key.code == sf::Keyboard::Space || CollisionClock.asSeconds() == 0)
-			//{
-			//bool SAT = collision.CheckForCollisionSAT(triangleArray[1], triangleArray[2]);
-			//cout << SAT << endl;
-			//}
 			#pragma region Keypresses
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num0)) { d_cir = false;	d_tri = false;		d_rect = false;		d_pent = false;}//None active
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) { d_cir = true;		d_tri = false;		d_rect = false;		d_pent = false;}//Cirlce active
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) { d_cir = true;		d_tri = false;		d_rect = false;		d_pent = false;}//Circle active
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) { d_cir = false;	d_tri = true;		d_rect = false;		d_pent = false;}//Triangle active
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3)) { d_cir = false;	d_tri = false;		d_rect = true;		d_pent = false;}//Rectamgle active
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3)) { d_cir = false;	d_tri = false;		d_rect = true;		d_pent = false;}//Rectangle active
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num4)) { d_cir = false;	d_tri = false;		d_rect = false;		d_pent = true;}//Pentagon active
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num5)) { d_cir = true;		d_tri = true;		d_rect = true;		d_pent = true;}//All active
 			#pragma endregion
@@ -134,13 +131,13 @@ int main()
 		window.setFramerateLimit(500);
 		//window.draw(text);
 
-		bool SAT = collision.CheckForCollisionSAT(triangleArray[1], triangleArray[2]);
+		bool SAT = collision.CheckForCollisionSAT(triangleArray[0], triangleArray[1]);
 		cout << SAT << endl;
 
 		#pragma region Draw Circles
 		if(d_cir)
 		{
-			for(int index = 0; index < ballNum - 1; index++)
+			for(int index = 0; index <= ballNum; index++)
 			{
 				circleArray[index].Update();
 				circleArray[index].Draw(window);
@@ -150,7 +147,7 @@ int main()
 		#pragma region Draw Triangles
 		if(d_tri)
 		{
-			for(int index = 0; index < triNum - 1; index++)
+			for(int index = 0; index != triNum; index++)
 			{
 				triangleArray[index].Update();
 				triangleArray[index].Draw(window);
@@ -160,7 +157,7 @@ int main()
 		#pragma region Draw Rectangle
 		if(d_rect)
 		{
-			for(int index = 0; index < rectNum - 1; index++)
+			for(int index = 0; index <= rectNum; index++)
 			{
 				rectangleArray[index].Update();
 				rectangleArray[index].Draw(window);
@@ -170,7 +167,7 @@ int main()
 		#pragma region Draw Pentagon
 		if(d_pent)
 		{
-			for(int index = 0; index < pentNum - 1; index++)
+			for(int index = 0; index <= pentNum; index++)
 			{
 				pentagonArray[index].Update();
 				pentagonArray[index].Draw(window);
