@@ -4,7 +4,6 @@
 MyRectangle::MyRectangle()
 {
 	numPoints = RECTANGLE_POINT_COUNT;
-
 	colourCool = 0;
 	size = 20;
 

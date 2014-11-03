@@ -4,6 +4,7 @@
 BouncingObject::BouncingObject()
 {
 	m_direction = sf::Vector2f((static_cast <float>(rand() % 100 + 1))/ 1000, (static_cast <float>(rand() % 100 + 1))/1000);
+	m_direction = sf::Vector2f((static_cast <float>(rand() % 100 + 1)) / 100, (static_cast <float>(rand() % 100 + 1)) / 100);
 	int num = rand() % 2;
 	if(num >= 1){swapDirectionX();}
 	num = rand() % 2;
@@ -11,7 +12,7 @@ BouncingObject::BouncingObject()
 
 	m_rot = static_cast <float>(rand() % 8 + 5)/ 100;
 	num = rand() % 2;
-	if(num >= 1){m_rot * -1;}
+	//if(num >= 1){m_rot * -1;}
 	m_rotationMatrix.rotate(m_rot);
 	colourCool = 0;
 	vertexCount = 0;
@@ -82,4 +83,9 @@ float BouncingObject::getRotation()
 void BouncingObject::setRotation(float r)
 {
 	m_rot = r;
+}
+
+sf::ConvexShape& BouncingObject::getShape()	
+{ 
+	return m_shape; 
 }

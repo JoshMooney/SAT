@@ -18,7 +18,7 @@ public:
 	void swapDirectionX();
 	void swapDirectionY();
 	sf::Vector2f getDirection();
-	sf::ConvexShape getShape()	{ return m_shape; }
+	sf::ConvexShape& getShape();
 	void setShape(sf::ConvexShape shape);
 	sf::Transform getRotationMatrix();
 	void setRotationMatrix();
@@ -27,10 +27,12 @@ public:
 	void Update();
 	void Draw(sf::RenderWindow& w);
 	vector<sf::Vector2f> m_pointArray;
-	sf::VertexArray vertexArray;
+	vector<sf::Vector2f> vertexArray;
+	sf::Vector2f m_position;
 	int numPoints;
-	virtual sf::Vector2f getPosition();
-	sf::VertexArray getVertexArray()	{ return vertexArray; }
+	virtual sf::Vector2f getPosition()	{ return m_position; }
+	vector<sf::Vector2f> getVertexArray()	{ return vertexArray; }
+	vector<sf::Vector2f> getPointArray()	{ return m_pointArray; }
 };
 
 #endif

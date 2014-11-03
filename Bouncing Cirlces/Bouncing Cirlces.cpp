@@ -19,7 +19,8 @@
 #pragma comment(lib,"opengl32.lib") 
 #pragma comment(lib,"glu32.lib") 
 
-#include <iostream> 
+#include <iostream>
+#include "SFML\System\Time.hpp"
 #include "Circle.h"
 #include "Triangle.h"
 #include "Rectangle.h"
@@ -38,19 +39,23 @@ using namespace std;
 int main() 
 { 
 	srand(NULL);
+	sf::Time CollisionClock = sf::Time();
 	int timer = 0;
 	bool d_cir = false, d_tri = false, d_rect = false, d_pent = false;
     // Create the main window 
     sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Bouncing Balls"); 
+
 	const int ballNum = 2;
-	const int triNum = 2;
+	const int triNum = 3;
 	const int rectNum = 2;
 	const int pentNum = 2;
-	Circle circleArray[ballNum];
+
+	CollisionDectection collision;
 	Triangle triangleArray[triNum];
+	Circle circleArray[ballNum];
 	MyRectangle rectangleArray[rectNum];
 	Pentagon pentagonArray[pentNum];
-	CollisionDectection collision;
+
 	#pragma region Font and text
 	// Declare and load a font
 	sf::Font font;
@@ -109,10 +114,11 @@ int main()
             // Escape key : exit 
             if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape)) 
                 window.close(); 
-			if (Event.key.code == sf::Keyboard::Space){
-				bool SAT = collision.sat(triangleArray[0], triangleArray[1]);
-				cout << SAT << endl;
-			}
+			//if (Event.key.code == sf::Keyboard::Space || CollisionClock.asSeconds() == 0)
+			//{
+			//bool SAT = collision.CheckForCollisionSAT(triangleArray[1], triangleArray[2]);
+			//cout << SAT << endl;
+			//}
 			#pragma region Keypresses
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num0)) { d_cir = false;	d_tri = false;		d_rect = false;		d_pent = false;}//None active
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) { d_cir = true;		d_tri = false;		d_rect = false;		d_pent = false;}//Cirlce active
@@ -127,6 +133,10 @@ int main()
         window.clear();
 		window.setFramerateLimit(500);
 		//window.draw(text);
+
+		bool SAT = collision.CheckForCollisionSAT(triangleArray[1], triangleArray[2]);
+		cout << SAT << endl;
+
 		#pragma region Draw Circles
 		if(d_cir)
 		{
