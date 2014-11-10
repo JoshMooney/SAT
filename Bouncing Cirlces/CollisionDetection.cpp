@@ -1,21 +1,34 @@
 #include "stdafx.h"
 #include "CollisionDetection.h"
 
+#include <math.h>
 
-bool CollisionDectection::CheckForCollisionSAT(BouncingObject &obj1, BouncingObject &obj2)
+bool CollisionDectection::CheckCollision(BouncingObject &obj1, BouncingObject &obj2)
 {
-	std::vector<sf::Vector2f> axis = getAxis(obj1.getVertexArray(), obj2.getVertexArray());	//Get all the seperating Axis of the twoShapes
-	std::vector<sf::Vector2f> obj1Points = obj1.getVertexArray();
-	std::vector<sf::Vector2f> obj2Points = obj2.getVertexArray();
+	bool collide = false;
+	//if (SimpleCollision(obj1.getRadius(), obj1.getPosition(), obj2.getRadius(), obj2.getPosition()))
+		collide = CheckForCollisionSAT(obj1.getVertexArray(), obj2.getVertexArray());
+	return collide;
+}
+
+bool CollisionDectection::SimpleCollision(float obj1Radius, sf::Vector2f obj1Position, float obj2Radius, sf::Vector2f obj2Position)
+{
+	float distance = sqrt(((obj2Position.x + obj1Position.x) * (obj2Position.x + obj1Position.x)) + ((obj2Position.y + obj1Position.y) * (obj2Position.y + obj1Position.y)));
+	return (distance < obj1Radius + obj2Radius);
+}
+
+bool CollisionDectection::CheckForCollisionSAT(vector<sf::Vector2f> obj1Vertex, vector<sf::Vector2f> obj2Vertex)
+{
+	std::vector<sf::Vector2f> axis = getAxis(obj1Vertex, obj2Vertex);	//Get all the seperating Axis of the twoShapes
 
 	for (int i = 0; i < axis.size(); i++)
 	{
 		float min1 = FLT_MAX;		//Set min
 		float max1 = -FLT_MAX;		//Set max
 
-		for (int j = 0; j < obj1.getShape().getPointCount(); j++)		//Loop through the object and find the min and max of this axis
+		for (int j = 0; j < obj1Vertex.size(); j++)		//Loop through the object and find the min and max of this axis
 		{
-			float testNum = dotProduct(axis.at(i), obj1Points.at(j));
+			float testNum = dotProduct(axis.at(i), obj1Vertex.at(j));
 			if (testNum < min1)
 				min1 = testNum;
 			if (testNum > max1)
@@ -25,9 +38,9 @@ bool CollisionDectection::CheckForCollisionSAT(BouncingObject &obj1, BouncingObj
 		float min2 = FLT_MAX;
 		float max2 = -FLT_MAX;
 
-		for (int j = 0; j < obj2.getShape().getPointCount(); j++)
+		for (int j = 0; j < obj2Vertex.size(); j++)
 		{
-			float testNum = dotProduct(axis.at(i), obj2Points.at(j));
+			float testNum = dotProduct(axis.at(i), obj2Vertex.at(j));
 			if (testNum < min2)
 				min2 = testNum;
 			if (testNum > max2)

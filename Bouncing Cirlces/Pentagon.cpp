@@ -10,10 +10,11 @@ Pentagon::Pentagon()
 {
 	colourCool = 0;
 	size = 20;
-
+	vertexArray.reserve(5);
 	getShape().setPointCount(5);
 
-	m_position = sf::Vector2f(400,300);
+	//m_position = sf::Vector2f(400,300);
+	m_position = sf::Vector2f((static_cast <float>(rand() % 800)), (static_cast <float>(rand() % 600)));
 
 	m_p1 = sf::Vector2f(20 , -20);
 	m_p2 = sf::Vector2f(-20 , 20);

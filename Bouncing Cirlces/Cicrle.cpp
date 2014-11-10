@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Circle.h"
 
-	Circle::Circle()
+Circle::Circle()
 	{
 		//m_shape.setPosition(rand() % 760, rand() % 560);
 		m_shape.setPosition(400,300);
@@ -18,67 +18,67 @@
 		if(num >= 1){m_direction.y *= -1;}
 	}
 
-	float Circle::getVelocity() const
+float Circle::getVelocity() const
 	{
 		return m_velocity;
 	}
-	void Circle::setVelocity(const float vel)
+void Circle::setVelocity(const float vel)
 	{
 		m_velocity = vel;
 	}
 
-	sf::Vector2f Circle::getPreviousPosition() const
+sf::Vector2f Circle::getPreviousPosition() const
 	{
 		return m_previousPositon;
 	}
-	void Circle::setPreviousPosition(const sf::Vector2f prev)
+void Circle::setPreviousPosition(const sf::Vector2f prev)
 	{
 		m_previousPositon = prev;
 	}
 
-	sf::Vector2f Circle::getDirection()
+sf::Vector2f Circle::getDirection()
 	{
 		m_direction.x = m_shape.getPosition().x - m_previousPositon.x;
 		m_direction.y = m_shape.getPosition().y - m_previousPositon.y;
 		return m_direction;
 	}
-	void Circle::setDirection(const sf::Vector2f dir)
+void Circle::setDirection(const sf::Vector2f dir)
 	{
 		m_direction = dir;
 	}
 
-	float Circle::getElasticity()
+float Circle::getElasticity()
 	{
 		return m_elasticity;
 	}
-	void Circle::setElasticity(const float elas)
+void Circle::setElasticity(const float elas)
 	{
 		m_elasticity = elas;
 	}
 
-	sf::CircleShape Circle::getShape()
+sf::CircleShape Circle::getShape()
 	{
 		return m_shape;
 	}
 
-	void Circle::Bounce()
+void Circle::Bounce()
 	{
 		bool colour = false;
 		if(m_shape.getPosition().x > 760 || m_shape.getPosition().x < 0) {m_direction.x *= -1;	colour = true;}
 		if(m_shape.getPosition().y > 560 || m_shape.getPosition().y < 0) {m_direction.y *= -1;	colour = true;}
-
+		/*
 		if(colour)
 		{
 			m_shape.setFillColor(sf::Color::White);
 			colourCool = 0;
-		}
+		}*/
 	}
-	void Circle::Move()
+void Circle::Move()
 	{
 		m_shape.setPosition(m_shape.getPosition().x + m_direction.x,
 							m_shape.getPosition().y + m_direction.y);
 	}
-	void Circle::Update()
+void Circle::Update()
 	{
 		if(m_shape.getFillColor() == sf::Color::White)
 			colourCool ++;
@@ -90,7 +90,7 @@
 		Circle::Move();
 		Circle::Bounce();	
 	}
-	void Circle::Draw(sf::RenderWindow& w)
+void Circle::Draw(sf::RenderWindow& w)
 	{
 		w.draw(m_shape);
 	}

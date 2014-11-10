@@ -12,6 +12,7 @@ private:
 	int vertexCount;
 	float m_rot;
 	int colourCool;
+	float radius;
 public:
 	BouncingObject();
 	void setDirection(sf::Vector2f dir);
@@ -31,8 +32,12 @@ public:
 	sf::Vector2f m_position;
 	int numPoints;
 	virtual sf::Vector2f getPosition()	{ return m_position; }
-	vector<sf::Vector2f> getVertexArray()	{ return vertexArray; }
+	void setPosition(sf::Vector2f pos)	{ m_position = pos; }
+	vector<sf::Vector2f> getVertexArray();
 	vector<sf::Vector2f> getPointArray()	{ return m_pointArray; }
+	void setRadius(float r)	{ radius = r; }
+	float getRadius()	{ return radius; }
+	void BounceObject(sf::Vector2f otherPos);
 };
 
 #endif

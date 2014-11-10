@@ -7,10 +7,12 @@ MyRectangle::MyRectangle()
 	colourCool = 0;
 	size = 20;
 
+	vertexArray.reserve(numPoints);
 	m_pointArray.reserve(numPoints);
 	getShape().setPointCount(numPoints);
 
-	m_position = sf::Vector2f(400,300);
+	//m_position = sf::Vector2f(400,300);
+	m_position = sf::Vector2f((static_cast <float>(rand() % 800)), (static_cast <float>(rand() % 600)));
 
 	m_pointArray.push_back(sf::Vector2f(20 , -20));
 	m_pointArray.push_back(sf::Vector2f(-20 , 20));
@@ -30,17 +32,17 @@ MyRectangle::MyRectangle()
 void MyRectangle::Bounce()
 {
 	bool colour = false;
-
-	if(getShape().getPoint(0).x > 800 || getShape().getPoint(0).x < 0 || 
-		getShape().getPoint(1).x > 800 || getShape().getPoint(1).x < 0 || 
-		getShape().getPoint(2).x > 800 || getShape().getPoint(2).x < 0 || 
-		getShape().getPoint(3).x > 800 || getShape().getPoint(3).x < 0) 
+	sf::ConvexShape shape = getShape();
+	if (shape.getPoint(0).x > 800 || shape.getPoint(0).x < 0 ||
+		shape.getPoint(1).x > 800 || shape.getPoint(1).x < 0 ||
+		shape.getPoint(2).x > 800 || shape.getPoint(2).x < 0 || 
+		shape.getPoint(3).x > 800 || shape.getPoint(3).x < 0) 
 	{swapDirectionX();	colour = true;}
 
-	if(getShape().getPoint(0).y > 600 || getShape().getPoint(0).y < 0 || 
-		getShape().getPoint(1).y > 600 || getShape().getPoint(1).y < 0 || 
-		getShape().getPoint(2).y > 600 || getShape().getPoint(2).y < 0 || 
-		getShape().getPoint(3).y > 600 || getShape().getPoint(3).y < 0) 
+	if (shape.getPoint(0).y > 600 || shape.getPoint(0).y < 0 ||
+		shape.getPoint(1).y > 600 || shape.getPoint(1).y < 0 || 
+		shape.getPoint(2).y > 600 || shape.getPoint(2).y < 0 || 
+		shape.getPoint(3).y > 600 || shape.getPoint(3).y < 0) 
 	{swapDirectionY();	colour = true;}
 
 	if(colour)

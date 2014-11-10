@@ -3,7 +3,7 @@
 
 BouncingObject::BouncingObject()
 {
-	//m_direction = sf::Vector2f((static_cast <float>(rand() % 100 + 1)) / 1000, (static_cast <float>(rand() % 100 + 1)) / 1000);
+	m_direction = sf::Vector2f((static_cast <float>(rand() % 100 + 1)) / 1000, (static_cast <float>(rand() % 100 + 1)) / 1000);
 	//m_direction = sf::Vector2f((static_cast <float>(rand() % 100 + 1)) / 500, (static_cast <float>(rand() % 100 + 1)) / 500);
 	int num = rand() % 2;
 	if(num >= 1){swapDirectionX();}
@@ -16,6 +16,8 @@ BouncingObject::BouncingObject()
 	m_rotationMatrix.rotate(m_rot);
 	colourCool = 0;
 	vertexCount = 0;
+	radius = 30;
+	
 }
 
 //void setDirection(sf::Vector2f dir);
@@ -88,4 +90,20 @@ void BouncingObject::setRotation(float r)
 sf::ConvexShape& BouncingObject::getShape()	
 { 
 	return m_shape; 
+}
+
+//vector<sf::Vector2f> getVertexArray();
+vector<sf::Vector2f> BouncingObject::getVertexArray()
+{
+	vertexArray.clear();
+	for (int i = 0; i < m_shape.getPointCount(); i++)
+		vertexArray.push_back(m_shape.getPoint(i));
+	return vertexArray;
+}
+
+void BouncingObject::BounceObject(sf::Vector2f otherPos)
+{
+	sf::Vector2f H = getPosition() - otherPos;
+	H /= sqrt(H.x * H.x + H.y * H.y);
+	m_direction = m_direction - 2 * (m_direction.x * H.x + m_direction.y * H.y) * H;
 }
